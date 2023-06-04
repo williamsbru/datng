@@ -8,8 +8,60 @@
 
 # Next.js Website Proxy
 
-## Quick start
-Please follow these steps:
+![image](https://github.com/donspablo/next.js-proxy/assets/6468571/3f64f3f6-e0e5-4ac0-b7aa-f693ffcd0bed)
+
+Next.js Proxy is a powerful tool that enables you to create a web proxy, mirror a desired website, and host the application on Vercel. By following these expert instructions, you can set up Next.js Proxy and deploy it on Vercel:
+
+1. Create a Next.js Project:
+   - Set up a new Next.js project or use an existing one. Ensure you have Next.js installed globally or within your project.
+
+2. Install Dependencies:
+   - Open your project directory in a terminal or command prompt.
+   - Run the following command to install the necessary dependencies:
+     ```
+     npm install http-proxy-middleware next
+     ```
+
+3. Configure the Proxy:
+   - Within your Next.js project, create a new directory named `api`.
+   - Inside the `api` directory, create a file named `proxy.js`.
+   - In `proxy.js`, import the required modules:
+     ```javascript
+     const { createProxyMiddleware } = require('http-proxy-middleware');
+     const { NextApiHandler } = require('next');
+     ```
+
+   - Implement the proxy configuration and create a Next.js API route handler:
+     ```javascript
+     const targetHost = 'https://example.com'; // Replace with your desired website URL
+
+     const proxy = createProxyMiddleware({
+       target: targetHost,
+       changeOrigin: true,
+     });
+
+     const handler = (req, res) => {
+       proxy(req, res);
+     };
+
+     export default handler;
+     ```
+
+4. Deploy on Vercel:
+   - Commit your changes to a version control system (e.g., Git).
+   - Connect your Next.js project to a Git repository, such as GitHub or GitLab, using the Vercel dashboard.
+   - Configure the deployment settings, such as the branch to deploy and the build command (typically `npm run build`).
+   - Once configured, deploy your Next.js project on Vercel by initiating the deployment process.
+
+5. Verify and Use the Proxy:
+   - Once the deployment is successful, Vercel will provide you with a unique URL for your application.
+   - Access the deployed application and append `/api/proxy` to the URL (e.g., `https://your-vercel-project.vercel.app/api/proxy`).
+   - This will act as the proxy endpoint, mirroring the desired website specified in the `targetHost` variable.
+
+By following these expert instructions, you can leverage Next.js Proxy to create a web proxy and host the application on Vercel. This allows you to mirror a desired website while utilizing the power and scalability of the Vercel hosting platform.
+
+![image](https://github.com/donspablo/next.js-proxy/assets/6468571/a11593ea-d675-417f-a19d-eee8e57e1bbd)
+
 
 # 1. Forking the Repository:
 
