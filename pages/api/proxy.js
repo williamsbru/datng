@@ -25,7 +25,7 @@ module.exports = (req, res) => {
                 res.statusCode = 418; // set different response status code
 
                 const response = responseBuffer.toString('utf8');
-                return response.replaceAll('Google ', 'Test ');
+                return response.replaceAll(target, window.location.origin);
             }),
         },
     })(req, res);
