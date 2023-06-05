@@ -1,6 +1,6 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
 const Jimp = require('jimp');
-const globalReplace = require('../globals/replace');
+const globalReplace = require('../../utils/replace');
 
 module.exports = (req, res) => {
     createProxyMiddleware({
