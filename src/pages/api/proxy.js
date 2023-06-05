@@ -1,9 +1,9 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
-const Jimp = require('jimp');
+const {includeFunc, replaceFunc} = require('../../utils/helpers');
 const globalReplace = require('../../utils/replace');
 const globalCSS = require('../../utils/css');
 const globalJS = require('../../utils/js');
-const {includeFunc, replaceFunc} = require('../../utils/helpers');
+const Jimp = require('jimp');
 
 const globalSpin = require('../../utils/helpers');
 
