@@ -16,6 +16,12 @@ module.exports = (req, res) => {
                             return image.getBufferAsync(Jimp.AUTO)
                     } else {
 
+                        String.prototype.replaceAll = function(strReplace, strWith) {
+                            let esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+                            let reg = new RegExp(esc, 'ig');
+                            return this.replace(reg, strWith);
+                        };
+
                         let response = responseBuffer.toString('utf8')
 
                         Object.keys(process.env.REPLACE).forEach(key => {
