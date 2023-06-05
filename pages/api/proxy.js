@@ -22,7 +22,7 @@ module.exports = (req, res) => {
                         let replace = JSON.parse(process.env.REPLACE);
 
                         Object.keys(replace).forEach(key => {
-                            response = response.replace(new RegExp(key, 'gi'), replace[key]);
+                            response = response.replace(new RegExp(key, 'g'), replace[key]);
                         });
 
                         return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
