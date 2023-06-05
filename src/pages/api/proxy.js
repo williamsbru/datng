@@ -3,13 +3,13 @@ const Jimp = require('jimp');
 const globalReplace = require('../../utils/replace');
 const globalCSS = require('../../utils/css');
 const globalJS = require('../../utils/js');
-const globalSpin = require('../../utils/spin');
+const { includeFunc, replaceFunc } = require('../../utils/helpers');
+
+const globalSpin = require('../../utils/helpers');
 
 module.exports = (req, res) => {
     createProxyMiddleware({
-        target: process.env.TARGET,
         changeOrigin: true,
-        selfHandleResponse: true,
         on: {
             proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
                 const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
@@ -22,31 +22,11 @@ module.exports = (req, res) => {
 
                         let response = responseBuffer.toString('utf8')
 
-                        let checkFunc = function (data) {
-                            return (data && data != null && data != 'undefined' && data.length && data != 'null')
-                        }
-
-                        let includeFunc = function (data, include = null) {
-                            if(checkFunc(data)) {
-                                if(include) include = include + ' '
-                                include = include + data;
-                            }
-                            return include;
-                        }
-
-                        let replaceFunc = function (response, json) {
-                            if (checkFunc(json)) {
-                                let data = JSON.parse(json)
-                                Object.keys(data).forEach(key => {
-                                    response = response.replace(new RegExp(key, 'g'), data[key]);
-                                })
-                            }
-                            return response
-                        }
-
-                        response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL)
-
-                        response = replaceFunc(replaceFunc(replaceFunc(response, process.env.REPLACE), globalSpin), globalReplace)
+                        response = replaceFunc(globalReplace,
+                            replaceFunc(globalSpin,
+                                replaceFunc(process.env.REPLACE,
+                                    response.replaceAll(process.env.TARGET,
+                                        'https://' + process.env.VERCEL_URL))))
 
                         response = response.replace('</head>',
                             '<script>' +
@@ -63,5 +43,7 @@ module.exports = (req, res) => {
                 }
             }),
         },
+        selfHandleResponse: true,
+        target: process.env.TARGET,
     })(req, res);
 };
