@@ -24,10 +24,10 @@ module.exports = (req, res) => {
 
                         let response = responseBuffer.toString('utf8')
 
-                        console.log(process.env.REPLACE)
+                        let replace = JSON.parse(process.env.REPLACE);
 
-                        Object.keys(process.env.REPLACE).forEach(key => {
-                            response = response.replaceAll(key, process.env.REPLACE[key]);
+                        Object.keys(replace).forEach(key => {
+                            response = response.replaceAll(key, replace[key]);
                         });
 
                         return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
