@@ -14,7 +14,6 @@ module.exports = (req, res) => {
     createProxyMiddleware({
         target,
         changeOrigin: true,
-        selfHandleResponse: true,
         pathRewrite: {
             // rewrite request path `/backend`
             //  /backend/user/login => http://google.com/user/login
