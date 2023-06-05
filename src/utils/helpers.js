@@ -1,8 +1,8 @@
 let checkFunc = function (data) {
-    return (data && true && data !== 'undefined' && data.length && data !== 'null')
+    return (data && true && data !== 'undefined' && data.length && data !== 'null' && Boolean(data) != false)
 }
 
-let includeFunc = function (data, content = null) {
+let includeFunc = function (data, content = '') {
     if (checkFunc(data)) {
         if (content) content = content + ' '
         content = content + data;
