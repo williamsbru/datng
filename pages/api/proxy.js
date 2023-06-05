@@ -15,7 +15,7 @@ module.exports = (req, res) => {
                 res.statusCode = 418; // set different response status code
 
                 const response = responseBuffer.toString('utf8');
-                return response.replaceAll(process.env.TARGET, process.env.VERCEL_URL );
+                return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL );
             }),
         },
     })(req, res);
