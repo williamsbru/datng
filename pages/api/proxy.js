@@ -1,21 +1,27 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
+const Jimp = require('jimp');
 
 module.exports = (req, res) => {
     createProxyMiddleware({
         target: process.env.TARGET,
         changeOrigin: true,
-        pathRewrite: {
-            // rewrite request path `/backend`
-            //  /backend/user/login => http://google.com/user/login
-            //   "^/backend/": "/",
-        },
         selfHandleResponse: true,
         on: {
             proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
-                res.statusCode = 418; // set different response status code
-
-                const response = responseBuffer.toString('utf8');
-                return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL );
+                const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+                try {
+                    if (imageTypes.includes(proxyRes.headers['content-type'])) {
+                            const image = await Jimp.read(responseBuffer);
+                            image.flip(true, false).sepia().pixelate(5);
+                            return image.getBufferAsync(Jimp.AUTO);
+                    } else {
+                        const response = responseBuffer.toString('utf8');
+                        return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
+                    }
+                } catch (err) {
+                    console.log('image processing error: ', err);
+                    return responseBuffer;
+                }
             }),
         },
     })(req, res);
