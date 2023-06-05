@@ -22,31 +22,18 @@ module.exports = (req, res) => {
 
                         let response = responseBuffer.toString('utf8')
 
-                        response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
-
-                        if(globalReplace) {
-                            Object.keys(globalReplace).forEach(key => {
-                                response = response.replace(new RegExp(key, 'g'), globalReplace[key]);
-                            });
-                        }
-
-                        if(globalSpin) {
-                            Object.keys(globalSpin).forEach(key => {
-                                response = response.replace(new RegExp(key, 'g'), globalSpin[key]);
-                            });
-                        }
-
-                        if(process.env.REPLACE) {
-
-                            let replace = JSON.parse(process.env.REPLACE);
-                            Object.keys(replace).forEach(key => {
-                                response = response.replace(new RegExp(key, 'g'), replace[key]);
-                            });
+                        let replaceFunc = function(response, data){
+                             if(data)  Object.keys(data).forEach(key => { response = response.replace(new RegExp(key, 'g'), data[key]);  })
+                             return response
                         }
 
                         let includeFunc = function(data, include = null){
                             return include + (data && data != 'undefined') ? (((include) ? ' ' : null) + data) : null;
                         }
+
+                        response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
+
+                        response = replaceFunc(replaceFunc(replaceFunc(response, process.env.REPLACE), globalSpin), globalReplace)
 
                         response = response.replace('</head>',
                             '<script>' +
@@ -54,7 +41,6 @@ module.exports = (req, res) => {
                             '</script><style>' +
                             includeFunc(process.env.CSS,includeFunc(globalCSS)) +
                             '</style></head>');
-
 
                         return response
                     }
