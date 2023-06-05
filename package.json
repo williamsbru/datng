@@ -12,8 +12,7 @@
     "jimp": "^0.22.8",
     "next": "^13",
     "react": "^18",
-    "react-dom": "^18",
-    "react-router-dom": "^6.11.2"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "eslint": "^8",
