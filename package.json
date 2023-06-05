@@ -1,7 +1,6 @@
 {
   "name": "nextjs-proxy",
   "version": "0.0.1",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,13 +8,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "*",
-    "react": "*",
-    "react-dom": "*"
+    "next": "^13.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "eslint": "*",
-    "eslint-config-next": "*",
-    "http-proxy-middleware": "*"
+    "eslint": "^8.42.0",
+    "eslint-config-next": "^13.4.4",
+    "http-proxy-middleware": "^2.0.6"
   }
 }
