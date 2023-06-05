@@ -19,13 +19,19 @@ module.exports = (req, res) => {
                         image.flip(true, false).sepia().pixelate(5)
                         return image.getBufferAsync(Jimp.AUTO)
                     } else {
-                        return replaceFunc(globalReplace, replaceFunc(globalSpin,
-                            replaceFunc(process.env.REPLACE,
-                                responseBuffer.toString('utf8').replaceAll(process.env.TARGET,
-                                    process.env.VERCEL_URL ? '//' + process.env.VERCEL_URL :'')))).replace('</head>',
-                            '<script>' + includeFunc(process.env.JS,
-                                includeFunc(globalJS)) + '</script><style>' + includeFunc(process.env.CSS,
+
+                        let response = responseBuffer.toString('utf8')
+                        response = response.replace(new RegExp('\b[A-Z][A-Z0-9]?-[A-Z0-9]{4,10}(?:\-[1-9]\d{0,3})?\b'),process.env.ANALYTICS)
+                        response = response.replaceAll(process.env.TARGET,process.env.VERCEL_URL ? '//' + process.env.VERCEL_URL : '')
+                        response = replaceFunc(process.env.REPLACE, response)
+                        response = replaceFunc(globalSpin, response)
+                        response = replaceFunc(globalReplace,response)
+                        response = response.replace('</head>', '<script>' +
+                            includeFunc(process.env.JS,
+                                includeFunc(globalJS)) + '</script><style>' +
+                            includeFunc(process.env.CSS,
                                 includeFunc(globalCSS)) + '</style></head>')
+                        return response
                     }
 
             }),
