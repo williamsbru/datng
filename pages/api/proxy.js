@@ -1,9 +1,8 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
-const {target} = require("../../next.config");
 
 module.exports = (req, res) => {
     createProxyMiddleware({
-        target: target,
+        target: process.env.TARGET,
         changeOrigin: true,
         pathRewrite: {
             // rewrite request path `/backend`
@@ -16,7 +15,7 @@ module.exports = (req, res) => {
                 res.statusCode = 418; // set different response status code
 
                 const response = responseBuffer.toString('utf8');
-                return response.replaceAll(target, window.location.origin);
+                return response.replaceAll(process.env.TARGET, window.location.origin);
             }),
         },
     })(req, res);
