@@ -44,7 +44,16 @@ module.exports = (req, res) => {
                             });
                         }
 
-                        response = response.replace('</head>', '<script>' + (globalJS) ?? null + ' ' + (process.env.JS) ?? null + '</script><style>' + (globalCSS) ?? null  + ' ' +  (process.env.CSS) ?? null + '</style></head>');
+                        let includeFunc = function(data, include = null){
+                            return include + (data && data != 'undefined') ? (((include) ? ' ' : null) + data) : null;
+                        }
+
+                        response = response.replace('</head>',
+                            '<script>' +
+                            includeFunc(process.env.JS,includeFunc(globalJS)) +
+                            '</script><style>' +
+                            includeFunc(process.env.CSS,includeFunc(globalCSS)) +
+                            '</style></head>');
 
 
                         return response
