@@ -1,18 +1,8 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
 
 module.exports = (req, res) => {
-    let target = "https://www.google.com/";
-    //   if (
-    //     req.url.startsWith("/api") ||
-    //     req.url.startsWith("/auth") ||
-    //     req.url.startsWith("/banner") ||
-    //     req.url.startsWith("/CollegeTask")
-    //   ) {
-    //     target = "http://106.15.2.32:6969";
-    //   }
-
     createProxyMiddleware({
-        target,
+        target: "https://www.google.com/",
         changeOrigin: true,
         pathRewrite: {
             // rewrite request path `/backend`
@@ -25,7 +15,7 @@ module.exports = (req, res) => {
                 res.statusCode = 418; // set different response status code
 
                 const response = responseBuffer.toString('utf8');
-                return response.replaceAll(target, window.location.origin);
+                return response.replaceAll(req.target, window.location.origin);
             }),
         },
     })(req, res);
