@@ -1,5 +1,6 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
 const Jimp = require('jimp');
+const globalReplace = require('globalReplace');
 
 module.exports = (req, res) => {
     createProxyMiddleware({
@@ -19,6 +20,13 @@ module.exports = (req, res) => {
                         let response = responseBuffer.toString('utf8')
 
                         response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
+
+
+                        let globalReplaceJson = JSON.parse(globalReplace);
+
+                        Object.keys(globalReplaceJson).forEach(key => {
+                            response = response.replace(new RegExp(key, 'g'), globalReplaceJson[key]);
+                        });
 
                         if(process.env.REPLACE) {
 
