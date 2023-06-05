@@ -24,6 +24,8 @@ module.exports = (req, res) => {
 
                         let response = responseBuffer.toString('utf8')
 
+                        console.log(process.env.REPLACE)
+
                         Object.keys(process.env.REPLACE).forEach(key => {
                             response = response.replaceAll(key, process.env.REPLACE[key]);
                         });
