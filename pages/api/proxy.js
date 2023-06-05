@@ -18,9 +18,9 @@ module.exports = (req, res) => {
 
                         let response = responseBuffer.toString('utf8')
 
-                        response = process.env.REPLACE.reduce((agg, item, index) => {
-                            return response.replaceAll(agg[Object.keys(item)[0] + (index + 1)] , item[Object.keys(item)[0]])
-                        }, {})
+                        Object.keys(process.env.REPLACE).forEach(key => {
+                            response = response.replaceAll(key, process.env.REPLACE[key]);
+                        });
 
                         return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
                     }
