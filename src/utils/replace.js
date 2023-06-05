@@ -6,6 +6,5 @@ module.exports = {
     "<p": "<z",
     "p>": "z>",
     "<div": "<w",
-    "div>": "w>",
-    "</body>":"<canvas class='orb-canvas'></canvas></body>"
+    "div>": "w>"
 }
