@@ -1,1 +1,1 @@
-module.exports = {"div":"blck"}
+module.exports = {"<div":"<blck","div>":"blck>"}
