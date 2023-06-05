@@ -8,8 +8,6 @@
 
 ![image](https://github.com/donspablo/next.js-proxy/assets/6468571/efe7351f-cf54-49bd-b505-fae61717a56f)
 
-![image](https://github.com/donspablo/next.js-proxy/assets/6468571/efe7351f-cf54-49bd-b505-fae61717a56f)
-
 # Next.js Website Proxy
 
 ![image](https://github.com/donspablo/next.js-proxy/assets/6468571/3f64f3f6-e0e5-4ac0-b7aa-f693ffcd0bed)
