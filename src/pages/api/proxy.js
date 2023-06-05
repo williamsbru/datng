@@ -30,7 +30,7 @@ module.exports = (req, res) => {
                         }
 
                         let includeFunc = function (data, include = null) {
-                            return include + (data && data != 'undefined') ? (((include) ? ' ' : null) + data) : null;
+                            return include + (data && data != 'undefined' && data.length) ? (((include) ? ' ' : null) + data) : null;
                         }
 
                         response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL)
