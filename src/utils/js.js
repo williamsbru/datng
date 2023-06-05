@@ -1,5 +1,1 @@
-function globalJS() {
-    return ""
-}
-
-export default globalJS
+module.exports = ""

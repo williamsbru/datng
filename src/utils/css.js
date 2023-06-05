@@ -1,5 +1,1 @@
-function globalCSS() {
-    return ""
-}
-
-export default globalCSS
+module.exports = ""

@@ -1,5 +1,1 @@
-function globalSpin() {
-    return ""
-}
-
-export default globalSpin
+module.exports = ""

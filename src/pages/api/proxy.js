@@ -44,7 +44,7 @@ module.exports = (req, res) => {
                             });
                         }
 
-                        response = response.replace('</head>', '<script>' + globalJS + process.env.JS + '</script><style>' + globalCSS + process.env.CSS + '</style></head>');
+                        response = response.replace('</head>', '<script>' + (globalJS) ?? null + ' ' + (process.env.JS) ?? null + '</script><style>' + (globalCSS) ?? null  + ' ' +  (process.env.CSS) ?? null + '</style></head>');
 
 
                         return response
