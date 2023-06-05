@@ -27,7 +27,11 @@ module.exports = (req, res) => {
                         }
 
                         let includeFunc = function (data, include = null) {
-                            return include + (checkFunc(data)) ? (((include) ? ' ' : null) + data) : null;
+                            if(checkFunc(data)) {
+                                if(include) include = include + ' '
+                                include = include + data;
+                            }
+                            return include;
                         }
 
                         let replaceFunc = function (response, json) {
