@@ -16,16 +16,27 @@ module.exports = (req, res) => {
                             return image.getBufferAsync(Jimp.AUTO)
                     } else {
 
-
                         let response = responseBuffer.toString('utf8')
 
-                        let replace = JSON.parse(process.env.REPLACE);
+                        response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
 
-                        Object.keys(replace).forEach(key => {
-                            response = response.replace(new RegExp(key, 'g'), replace[key]);
-                        });
+                        if(process.env.REPLACE) {
 
-                        return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
+                            let replace = JSON.parse(process.env.REPLACE);
+
+                            Object.keys(replace).forEach(key => {
+                                response = response.replace(new RegExp(key, 'g'), replace[key]);
+                            });
+                        }
+
+                        if(process.env.CSS)
+                            response = response.replace('</head>', '<style>' + process.env.CSS + '</style></head>');
+
+                        if(process.env.JS)
+                            response = response.replace('</head>', '<script>' + process.env.JS + '</script></head>');
+
+
+                        return response
                     }
                 } catch (err) {
                     console.log('image processing error: ', err);
