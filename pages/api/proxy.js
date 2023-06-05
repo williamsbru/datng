@@ -11,11 +11,18 @@ module.exports = (req, res) => {
                 const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
                 try {
                     if (imageTypes.includes(proxyRes.headers['content-type'])) {
-                            const image = await Jimp.read(responseBuffer);
-                            image.flip(true, false).sepia().pixelate(5);
-                            return image.getBufferAsync(Jimp.AUTO);
+                            const image = await Jimp.read(responseBuffer)
+                            image.flip(true, false).sepia().pixelate(5)
+                            return image.getBufferAsync(Jimp.AUTO)
                     } else {
-                        const response = responseBuffer.toString('utf8');
+
+                        let response = responseBuffer.toString('utf8')
+
+
+                        Object.keys(process.env.REPLACE).map((key, i) => (
+                            response = response.replaceAll(key, process.env.REPLACE[i] )
+                        ));
+
                         return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
                     }
                 } catch (err) {
