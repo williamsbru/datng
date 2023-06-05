@@ -10,6 +10,8 @@
 
 # Next.js Website Proxy
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7a251573-b9b3-45d6-9d74-86340e727316/deploy-status)](https://app.netlify.com/sites/cheerful-jelly-1f8374/deploys)
+
 ![image](https://github.com/donspablo/next.js-proxy/assets/6468571/3f64f3f6-e0e5-4ac0-b7aa-f693ffcd0bed)
 
 Next.js Proxy is a powerful tool that enables you to create a web proxy, mirror a desired website, and host the
