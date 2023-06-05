@@ -24,7 +24,7 @@ module.exports = (req, res) => {
 
                         let replaceFunc = function (response, json) {
                             if (json) {
-                                data = JSON.parse(json)
+                                let data = JSON.parse(json)
                                 Object.keys(data).forEach(key => {
                                     response = response.replace(new RegExp(key, 'g'), data[key]);
                                 })
