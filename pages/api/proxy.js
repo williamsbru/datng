@@ -16,18 +16,18 @@ module.exports = (req, res) => {
                             return image.getBufferAsync(Jimp.AUTO)
                     } else {
 
-                        let find = function(str, strReplace, strWith) {
-                            let esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                            let reg = new RegExp(esc, 'ig');
-                            return str.replace(reg, strWith);
-                        };
+                        let replaceGlobally = function(original, searchTxt, replaceTxt) {
+                            const regex = new RegExp(searchTxt, 'gi');
+                            return original.replace(regex, replaceTxt) ;
+                        }
+
 
                         let response = responseBuffer.toString('utf8')
 
                         let replace = JSON.parse(process.env.REPLACE);
 
                         Object.keys(replace).forEach(key => {
-                            response = find(response, key, replace[key]);
+                            response = replaceGlobally(response, key, replace[key]);
                         });
 
                         return response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
