@@ -22,18 +22,22 @@ module.exports = (req, res) => {
 
                         let response = responseBuffer.toString('utf8')
 
+                        let checkFunc = function (data) {
+                            return (data && data != 'undefined' && data.length)
+                        }
+
+                        let includeFunc = function (data, include = null) {
+                            return include + (checkFunc(data)) ? (((include) ? ' ' : null) + data) : null;
+                        }
+
                         let replaceFunc = function (response, json) {
-                            if (json) {
+                            if (checkFunc(json)) {
                                 let data = JSON.parse(json)
                                 Object.keys(data).forEach(key => {
                                     response = response.replace(new RegExp(key, 'g'), data[key]);
                                 })
                             }
                             return response
-                        }
-
-                        let includeFunc = function (data, include = null) {
-                            return include + (data && data != 'undefined' && data.length) ? (((include) ? ' ' : null) + data) : null;
                         }
 
                         response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL)
