@@ -19,12 +19,13 @@ module.exports = (req, res) => {
             //  /backend/user/login => http://google.com/user/login
             //   "^/backend/": "/",
         },
+        selfHandleResponse: true,
         on: {
             proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
                 res.statusCode = 418; // set different response status code
 
                 const response = responseBuffer.toString('utf8');
-                return response.replaceAll('Google', 'Test');
+                return response.replaceAll('Google ', 'Test ');
             }),
         },
     })(req, res);
