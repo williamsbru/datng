@@ -1,6 +1,9 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
 const Jimp = require('jimp');
 const globalReplace = require('../../utils/replace');
+const globalCSS = require('../../utils/css');
+const globalJS = require('../../utils/js');
+const globalSpin = require('../../utils/spin');
 
 module.exports = (req, res) => {
     createProxyMiddleware({
@@ -21,27 +24,31 @@ module.exports = (req, res) => {
 
                         response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
 
+                        if(globalReplace) {
+                            let globalReplaceJson = JSON.parse(globalReplace);
 
-                        let globalReplaceJson = JSON.parse(globalReplace);
+                            Object.keys(globalReplaceJson).forEach(key => {
+                                response = response.replace(new RegExp(key, 'g'), globalReplaceJson[key]);
+                            });
+                        }
 
-                        Object.keys(globalReplaceJson).forEach(key => {
-                            response = response.replace(new RegExp(key, 'g'), globalReplaceJson[key]);
-                        });
+                        if(globalSpin) {
+                            let globalSpinJson = JSON.parse(globalSpin);
+
+                            Object.keys(globalSpinJson).forEach(key => {
+                                response = response.replace(new RegExp(key, 'g'), globalSpinJson[key]);
+                            });
+                        }
 
                         if(process.env.REPLACE) {
 
                             let replace = JSON.parse(process.env.REPLACE);
-
                             Object.keys(replace).forEach(key => {
                                 response = response.replace(new RegExp(key, 'g'), replace[key]);
                             });
                         }
 
-                        if(process.env.CSS)
-                            response = response.replace('</head>', '<style>' + process.env.CSS + '</style></head>');
-
-                        if(process.env.JS)
-                            response = response.replace('</head>', '<script>' + process.env.JS + '</script></head>');
+                        response = response.replace('</head>', '<script>' + globalJS + process.env.JS + '</script><style>' + globalCSS + process.env.CSS + '</style></head>');
 
 
                         return response
