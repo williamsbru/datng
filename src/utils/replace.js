@@ -1,4 +1,1 @@
-module.exports = {
-    "<div": "<w",
-    "div>": "w>"
-}
+module.exports = {}
