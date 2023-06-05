@@ -23,7 +23,7 @@ module.exports = (req, res) => {
                         let response = responseBuffer.toString('utf8')
 
                         let checkFunc = function (data) {
-                            return (data && data != 'undefined' && data.length)
+                            return (data && data != null && data != 'undefined' && data.length && data != 'null')
                         }
 
                         let includeFunc = function (data, include = null) {
