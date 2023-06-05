@@ -22,7 +22,7 @@ module.exports = (req, res) => {
                         return replaceFunc(globalReplace, replaceFunc(globalSpin,
                             replaceFunc(process.env.REPLACE,
                                 responseBuffer.toString('utf8').replaceAll(process.env.TARGET,
-                                    process.env.VERCEL_URL ?? '')))).replace('</head>',
+                                    process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL :'')))).replace('</head>',
                             '<script>' + includeFunc(process.env.JS,
                                 includeFunc(globalJS)) + '</script><style>' + includeFunc(process.env.CSS,
                                 includeFunc(globalCSS)) + '</style></head>')
