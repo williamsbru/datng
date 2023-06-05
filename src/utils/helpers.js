@@ -13,7 +13,7 @@ let includeFunc = function (data, content = null) {
 
 let replaceFunc = function (data, content) {
     if (checkFunc(data)) {
-        let data = JSON.parse(data)
+        data = JSON.parse(data)
         Object.keys(data).forEach(key => {
             content = content.replace(new RegExp(key, 'g'), data[key]);
         })
