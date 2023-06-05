@@ -1,1 +1,1 @@
-module.exports = {"<div":"<blck","div>":"blck>"}
+module.exports = {"span":"div"}
