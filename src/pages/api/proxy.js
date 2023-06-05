@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     createProxyMiddleware({
         changeOrigin: true,
         on: {
-            proxyRes: responseInterceptor(async (responseBuffer, proxyRes) => {
+            proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
                 const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
                 try {
                     if (imageTypes.includes(proxyRes.headers['content-type'])) {
@@ -19,11 +19,12 @@ module.exports = (req, res) => {
                         image.flip(true, false).sepia().pixelate(5)
                         return image.getBufferAsync(Jimp.AUTO)
                     } else {
-
-                        return replaceFunc(globalReplace,
-                            replaceFunc(globalSpin,
-                                replaceFunc(process.env.REPLACE, responseBuffer.toString('utf8').replaceAll(process.env.TARGET,  process.env.VERCEL_URL)))).replace('</head>', '<script>' + includeFunc(process.env.JS,
-                                includeFunc(globalJS)) + '</script>' + '<style>' + includeFunc(process.env.CSS,
+                        return replaceFunc(globalReplace, replaceFunc(globalSpin,
+                            replaceFunc(process.env.REPLACE,
+                                responseBuffer.toString('utf8').replaceAll(process.env.TARGET,
+                                    'https://' + process.env.VERCEL_URL)))).replace('</head>',
+                            '<script>' + includeFunc(process.env.JS,
+                                includeFunc(globalJS)) + '</script><style>' + includeFunc(process.env.CSS,
                                 includeFunc(globalCSS)) + '</style></head>')
                     }
                 } catch (err) {
