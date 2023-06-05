@@ -1,6 +1,5 @@
-
 let checkFunc = function (data) {
-    return (data && data != null && data != 'undefined' && data.length && data != 'null')
+    return (data && true && data !== 'undefined' && data.length && data !== 'null')
 }
 
 let includeFunc = function (data, content = null) {
@@ -21,4 +20,4 @@ let replaceFunc = function (data, content) {
     return content
 }
 
-export { includeFunc, replaceFunc }
+export {includeFunc, replaceFunc}

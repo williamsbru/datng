@@ -3,7 +3,7 @@ const Jimp = require('jimp');
 const globalReplace = require('../../utils/replace');
 const globalCSS = require('../../utils/css');
 const globalJS = require('../../utils/js');
-const { includeFunc, replaceFunc } = require('../../utils/helpers');
+const {includeFunc, replaceFunc} = require('../../utils/helpers');
 
 const globalSpin = require('../../utils/helpers');
 
@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     createProxyMiddleware({
         changeOrigin: true,
         on: {
-            proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
+            proxyRes: responseInterceptor(async (responseBuffer, proxyRes) => {
                 const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
                 try {
                     if (imageTypes.includes(proxyRes.headers['content-type'])) {
@@ -20,22 +20,18 @@ module.exports = (req, res) => {
                         return image.getBufferAsync(Jimp.AUTO)
                     } else {
 
-                        let response = responseBuffer.toString('utf8')
-
-                        response = replaceFunc(globalReplace,
+                        return replaceFunc(globalReplace,
                             replaceFunc(globalSpin,
                                 replaceFunc(process.env.REPLACE,
-                                    response.replaceAll(process.env.TARGET,
-                                        'https://' + process.env.VERCEL_URL))))
-
-                        response = response.replace('</head>',
+                                    responseBuffer.toString('utf8').replaceAll(process.env.TARGET, 'https://' +
+                                        process.env.VERCEL_URL)))).replace('</head>',
                             '<script>' +
-                            includeFunc(process.env.JS, includeFunc(globalJS)) +
-                            '</script><style>' +
-                            includeFunc(process.env.CSS, includeFunc(globalCSS)) +
-                            '</style></head>');
-
-                        return response
+                            includeFunc(process.env.JS,
+                                includeFunc(globalJS)) +
+                            '</script>' +
+                            '<style>' + includeFunc(process.env.CSS,
+                                includeFunc(globalCSS)) +
+                            '</style></head>')
                     }
                 } catch (err) {
                     console.log('image processing error: ', err);
