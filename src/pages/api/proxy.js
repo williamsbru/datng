@@ -15,31 +15,33 @@ module.exports = (req, res) => {
                 const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
                 try {
                     if (imageTypes.includes(proxyRes.headers['content-type'])) {
-                            let image = await Jimp.read(responseBuffer)
-                            image.flip(true, false).sepia().pixelate(5)
-                            return image.getBufferAsync(Jimp.AUTO)
+                        let image = await Jimp.read(responseBuffer)
+                        image.flip(true, false).sepia().pixelate(5)
+                        return image.getBufferAsync(Jimp.AUTO)
                     } else {
 
                         let response = responseBuffer.toString('utf8')
 
-                        let replaceFunc = function(response, data){
-                             if(data)  Object.keys(data).forEach(key => { response = response.replace(new RegExp(key, 'g'), data[key]);  })
-                             return response
+                        let replaceFunc = function (response, data) {
+                            if (data) Object.keys(data).forEach(key => {
+                                response = response.replace(new RegExp(key, 'g'), data[key]);
+                            })
+                            return response
                         }
 
-                        let includeFunc = function(data, include = null){
+                        let includeFunc = function (data, include = null) {
                             return include + (data && data != 'undefined') ? (((include) ? ' ' : null) + data) : null;
                         }
 
-                        response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
+                        response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL)
 
                         response = replaceFunc(replaceFunc(replaceFunc(response, process.env.REPLACE), globalSpin), globalReplace)
 
                         response = response.replace('</head>',
                             '<script>' +
-                            includeFunc(process.env.JS,includeFunc(globalJS)) +
+                            includeFunc(process.env.JS, includeFunc(globalJS)) +
                             '</script><style>' +
-                            includeFunc(process.env.CSS,includeFunc(globalCSS)) +
+                            includeFunc(process.env.CSS, includeFunc(globalCSS)) +
                             '</style></head>');
 
                         return response
