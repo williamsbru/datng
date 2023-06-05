@@ -6,7 +6,6 @@ const globalJS = require('../../utils/js');
 const Jimp = require('jimp');
 
 const globalSpin = require('../../utils/helpers');
-const origin = window.location.origin;
 
 module.exports = (req, res) => {
     createProxyMiddleware({
@@ -23,7 +22,7 @@ module.exports = (req, res) => {
                         return replaceFunc(globalReplace, replaceFunc(globalSpin,
                             replaceFunc(process.env.REPLACE,
                                 responseBuffer.toString('utf8').replaceAll(process.env.TARGET,
-                                    origin)))).replace('</head>',
+                                    process.env.VERCEL_URL ?? '')))).replace('</head>',
                             '<script>' + includeFunc(process.env.JS,
                                 includeFunc(globalJS)) + '</script><style>' + includeFunc(process.env.CSS,
                                 includeFunc(globalCSS)) + '</style></head>')
