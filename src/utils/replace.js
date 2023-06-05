@@ -1,5 +1,5 @@
 function globalReplace() {
-    return '{"div","block"}'
+    return '{"div":"block"}'
 }
 
 export default globalReplace
