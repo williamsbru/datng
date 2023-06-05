@@ -23,10 +23,12 @@ module.exports = (req, res) => {
                         let response = responseBuffer.toString('utf8')
 
                         let replaceFunc = function (response, json) {
-                            data = JSON.parse(json)
-                            if (data) Object.keys(data).forEach(key => {
-                                response = response.replace(new RegExp(key, 'g'), data[key]);
-                            })
+                            if (json) {
+                                data = JSON.parse(json)
+                                Object.keys(data).forEach(key => {
+                                    response = response.replace(new RegExp(key, 'g'), data[key]);
+                                })
+                            }
                             return response
                         }
 
