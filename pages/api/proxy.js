@@ -1,4 +1,4 @@
-const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
+const {createProxyMiddleware} = require("http-proxy-middleware");
 
 module.exports = (req, res) => {
     let target = "https://www.google.com/";//your website url
@@ -15,16 +15,5 @@ module.exports = (req, res) => {
         target,
         changeOrigin: true,
         selfHandleResponse: true,
-        pathRewrite: {
-            // rewrite request path `/backend`
-            //  /backend/user/login => http://google.com/user/login
-            //   "^/backend/": "/",
-        },
-        on: {
-            proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
-                const response = responseBuffer.toString('utf8'); // convert buffer to string
-                return response.replace('Google', 'Test'); // manipulate response and return the result
-            }),
-        },
     })(req, res);
 };
