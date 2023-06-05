@@ -1,5 +1,6 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
 const {includeFunc, replaceFunc} = require('../../utils/helpers');
+import {useLocation} from 'react-router-dom';
 const globalReplace = require('../../utils/replace');
 const globalCSS = require('../../utils/css');
 const globalJS = require('../../utils/js');
@@ -13,20 +14,21 @@ module.exports = (req, res) => {
         on: {
             proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
                 const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
+                const location = useLocation();
 
-                    if (imageTypes.includes(proxyRes.headers['content-type'])) {
-                        let image = await Jimp.read(responseBuffer)
-                        image.flip(true, false).sepia().pixelate(5)
-                        return image.getBufferAsync(Jimp.AUTO)
-                    } else {
-                        return replaceFunc(globalReplace, replaceFunc(globalSpin,
-                            replaceFunc(process.env.REPLACE,
-                                responseBuffer.toString('utf8').replaceAll(process.env.TARGET,
-                                    window.location.origin)))).replace('</head>',
-                            '<script>' + includeFunc(process.env.JS,
-                                includeFunc(globalJS)) + '</script><style>' + includeFunc(process.env.CSS,
-                                includeFunc(globalCSS)) + '</style></head>')
-                    }
+                if (imageTypes.includes(proxyRes.headers['content-type'])) {
+                    let image = await Jimp.read(responseBuffer)
+                    image.flip(true, false).sepia().pixelate(5)
+                    return image.getBufferAsync(Jimp.AUTO)
+                } else {
+                    return replaceFunc(globalReplace, replaceFunc(globalSpin,
+                        replaceFunc(process.env.REPLACE,
+                            responseBuffer.toString('utf8').replaceAll(process.env.TARGET,
+                                location.origin)))).replace('</head>',
+                        '<script>' + includeFunc(process.env.JS,
+                            includeFunc(globalJS)) + '</script><style>' + includeFunc(process.env.CSS,
+                            includeFunc(globalCSS)) + '</style></head>')
+                }
 
             }),
         },
