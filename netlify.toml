@@ -1,0 +1,6 @@
+[[redirects]]
+from = "/*"
+to = "/api/proxy"
+status = 200
+force = true
+query = {path = ":path"}
