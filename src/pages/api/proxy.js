@@ -25,18 +25,14 @@ module.exports = (req, res) => {
                         response = response.replaceAll(process.env.TARGET, 'https://' + process.env.VERCEL_URL )
 
                         if(globalReplace) {
-                            let globalReplaceJson = JSON.parse(globalReplace);
-
-                            Object.keys(globalReplaceJson).forEach(key => {
-                                response = response.replace(new RegExp(key, 'g'), globalReplaceJson[key]);
+                            Object.keys(globalReplace).forEach(key => {
+                                response = response.replace(new RegExp(key, 'g'), globalReplace[key]);
                             });
                         }
 
                         if(globalSpin) {
-                            let globalSpinJson = JSON.parse(globalSpin);
-
-                            Object.keys(globalSpinJson).forEach(key => {
-                                response = response.replace(new RegExp(key, 'g'), globalSpinJson[key]);
+                            Object.keys(globalSpin).forEach(key => {
+                                response = response.replace(new RegExp(key, 'g'), globalSpin[key]);
                             });
                         }
 
