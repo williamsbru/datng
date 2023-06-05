@@ -13,7 +13,7 @@ module.exports = (req, res) => {
         on: {
             proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
                 const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
-                try {
+               // try {
                     if (imageTypes.includes(proxyRes.headers['content-type'])) {
                             let image = await Jimp.read(responseBuffer)
                             image.flip(true, false).sepia().pixelate(5)
@@ -53,10 +53,10 @@ module.exports = (req, res) => {
 
                         return response
                     }
-                } catch (err) {
+                /*} catch (err) {
                     console.log('image processing error: ', err);
                     return responseBuffer;
-                }
+                }*/
             }),
         },
     })(req, res);
