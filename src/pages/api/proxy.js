@@ -1,39 +1,17 @@
 const {createProxyMiddleware, responseInterceptor} = require("http-proxy-middleware");
 const {includeFunc, replaceFunc} = require('../../utils/helpers');
 const globalReplace = require('../../utils/replace');
-const globalCSS = require('../../utils/css');
-const globalJS = require('../../utils/js');
 const Jimp = require('jimp');
-
-const globalSpin = require('../../utils/helpers');
 
 module.exports = (req, res) => {
     createProxyMiddleware({
         changeOrigin: true,
         on: {
             proxyRes: responseInterceptor(async (responseBuffer, proxyRes, req, res) => {
-                const imageTypes = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'];
-
-                    if (imageTypes.includes(proxyRes.headers['content-type'])) {
-                        let image = await Jimp.read(responseBuffer)
-                        image.flip(true, false).sepia().pixelate(5)
-                        return image.getBufferAsync(Jimp.AUTO)
-                    } else {
-
-                        let response = responseBuffer.toString('utf8')
-                        response = response.replace(new RegExp('\b[A-Z][A-Z0-9]?-[A-Z0-9]{4,10}(?:\-[1-9]\d{0,3})?\b'),process.env.ANALYTICS)
-                        response = response.replaceAll(process.env.TARGET,process.env.VERCEL_URL ? '//' + process.env.VERCEL_URL : '')
-                        response = replaceFunc(process.env.REPLACE, response)
-                        response = replaceFunc(globalSpin, response)
-                        response = replaceFunc(globalReplace,response)
-                        response = response.replace('</head>', '<script>' +
-                            includeFunc(process.env.JS,
-                                includeFunc(globalJS)) + '</script><style>' +
-                            includeFunc(process.env.CSS,
-                                includeFunc(globalCSS)) + '</style></head>')
-                        return response
-                    }
-
+                if (!['image/png', 'image/jpg', 'image/jpeg', 'image/gif'].includes(proxyRes.headers['content-type'])) return replaceFunc([globalReplace,process.env.REPLACE], responseBuffer.toString('utf8')).replaceAll((process.env.VERCEL_URL) ? process.env.TARGET : '', '//' + process.env.VERCEL_URL).replace(new RegExp('\b[A-Z][A-Z0-9]?-[A-Z0-9]{4,10}(?:\-[1-9]\d{0,3})?\b'), process.env.ANALYTICS).replace('</head>', '<script>' + includeFunc(process.env.JS) + '</script><style>' + includeFunc(process.env.CSS) + '</style></head>')
+                let image = await Jimp.read(responseBuffer)
+                image.flip(true, false).sepia().pixelate(5)
+                return image.getBufferAsync(Jimp.AUTO)
             }),
         },
         selfHandleResponse: true,

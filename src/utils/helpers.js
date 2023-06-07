@@ -1,23 +1,26 @@
 let checkFunc = function (data) {
-    return (data && true && data !== 'undefined' && data.length && data !== 'null' && Boolean(data) !== false)
+    return !(data && data !== 'undefined' && data.length && data !== 'null' && Boolean(data) !== false)
 }
-
 let includeFunc = function (data, content = '') {
-    if (checkFunc(data)) {
-        if (content) content = content + ' '
-        content = content + data;
-    }
-    return content;
+    if (checkFunc(data)) return content
+    return ((content) ? content + ' ' :  content) + data
 }
 
-let replaceFunc = function (data, content) {
-    if (checkFunc(data)) {
-        data = JSON.parse(data)
-        Object.keys(data).forEach(key => {
-            content = content.replace(new RegExp(key, 'g'), data[key]);
-        })
-    }
-    return content
+function assign(data, obj) {
+    if(!checkFunc(data)) return Object.assign(obj,JSON.parse(data))
 }
 
+function replaceFunc(data, content) {
+
+    let obj = {}
+
+    let result = content
+
+    data.forEach((i)=>obj=assign(i, obj))
+
+    result = result.replace(new RegExp(Object.keys(obj).join("|"), "g"),  (m)=> obj[m])
+
+    return result
+
+}
 export {includeFunc, replaceFunc}

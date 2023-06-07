@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+process.setMaxListeners(0);
 const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
