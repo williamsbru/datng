@@ -6,7 +6,7 @@ let includeFunc = function (data, content = '') {
 }
 
 function assign(data, obj) {
-    if (!checkFunc(data)) return Object.assign(obj, JSON.parse(data))
+    return (!checkFunc(data)) ? Object.assign(obj, JSON.parse(data)) : obj
 }
 
 function replaceFunc(data, content) {
