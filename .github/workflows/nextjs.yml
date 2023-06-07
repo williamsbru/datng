@@ -29,6 +29,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Run Commands with Secret
+        env:
+          TARGET: ${{ secrets.TARGET }}
+          ANALYTICS: ${{ secrets.ANALYTICS }}
+          VERCEL_URL: ${{ secrets.VERCEL_URL }}
+          JS: ${{ secrets.JS }}
+          CSS: ${{ secrets.CSS }}
+          REPLACE: ${{ secrets.REPLACE }}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Detect package manager
