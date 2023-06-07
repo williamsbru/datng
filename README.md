@@ -10,7 +10,7 @@
 
 # Next.js Website Proxy
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7a251573-b9b3-45d6-9d74-86340e727316/deploy-status)](https://app.netlify.com/sites/freegamesonline/deploys)
+[![Build App](https://github.com/donspablo/next.js-proxy/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/donspablo/next.js-proxy/actions/workflows/pages/pages-build-deployment) [![Netlify Status](https://api.netlify.com/api/v1/badges/7a251573-b9b3-45d6-9d74-86340e727316/deploy-status)](https://app.netlify.com/sites/freegamesonline/deploys) ![Vercel](https://vercelbadge.vercel.app/api/donspablo/next.js-proxy) [![Deploy App](https://github.com/donspablo/next.js-proxy/actions/workflows/nextjs.yml/badge.svg)](https://github.com/donspablo/next.js-proxy/actions/workflows/nextjs.yml)
 
 ![image](https://github.com/donspablo/next.js-proxy/assets/6468571/3f64f3f6-e0e5-4ac0-b7aa-f693ffcd0bed)
 
