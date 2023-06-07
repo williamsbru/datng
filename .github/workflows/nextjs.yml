@@ -29,7 +29,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run Commands with Secret
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Detect package manager
+        id: detect-package-manager
         env:
           TARGET: ${{ secrets.TARGET }}
           ANALYTICS: ${{ secrets.ANALYTICS }}
@@ -37,10 +40,6 @@ jobs:
           JS: ${{ secrets.JS }}
           CSS: ${{ secrets.CSS }}
           REPLACE: ${{ secrets.REPLACE }}
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Detect package manager
-        id: detect-package-manager
         run: |
           if [ -f "${{ github.workspace }}/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
