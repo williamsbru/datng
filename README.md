@@ -11,7 +11,37 @@
 <p align="center"><img src="https://github.com/donspablo/next.js-proxy/assets/6468571/36cb79e5-854d-4778-830f-6ed3df591ec6" /></p>
 <p align="center"><a href="https://github.com/donspablo/next.js-proxy/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/donspablo/next.js-proxy/actions/workflows/pages/pages-build-deployment/badge.svg"/></a> <a href="https://app.netlify.com/sites/freegamesonline/deploys"><img src="https://api.netlify.com/api/v1/badges/7a251573-b9b3-45d6-9d74-86340e727316/deploy-status"/></a> <a href="https://vercelbadge.vercel.app/api/donspablo/next.js-proxy"><img src="https://github.com/donspablo/next.js-proxy/actions/workflows/nextjs.yml/badge.svg"/></a> <a href="https://github.com/donspablo/next.js-proxy/actions/workflows/nextjs.yml"><img src="https://vercelbadge.vercel.app/api/donspablo/next.js-proxy"/></a></p>
 
-# Next.js Website Proxy
+# Next.js Website Overview
+
+### 🦄: EFFORTLESS WEBSITE MIRRORING: VERSATILE, COMPATIBLE, AND SECURE
+
+Mirror any website seamlessly with our comprehensive solution. It surpasses popular sites like Google, Wikipedia, Twitter, or Instagram in compatibility and versatility. Handle complex websites effortlessly, with most functions ready to use out of the box. We continuously enhance features for specific sites.
+
+### 🚀: OPTIMIZE PERFORMANCE WITH LOCAL FILE CACHING
+
+Maximize bandwidth and reduce latency using MIME-based local file caching. Ideal for limited bandwidth or high latency scenarios between the mirror server and the site.
+
+### ⚡: ACCELERATE CONTENT DELIVERY WITH CDN SUPPORT
+
+Leverage CDN support to boost user access speed. Serve hot statistical resources through a CDN, even with a mirror server abroad.
+
+### 👽: STREAMLINED CONFIGURATION AND DEPLOYMENT
+
+Effortlessly set up by adding the website's domain name. Our solution simplifies the process for a hassle-free experience.
+
+### 🌈: CUSTOMIZE SECURITY MEASURES
+
+Implement IP or user-agent-based access control and visitor verification mechanisms. Enhance security with question-answer or custom verification functions.
+
+### ☄️: SEAMLESS HANDLING OF DYNAMIC CONTENT
+
+Effortlessly rewrite JSON, JavaScript, HTML, CSS, and dynamic URLs. Ensure flawless compatibility and accurate rendering of complex content.
+
+### 👾: SMOOTH AUDIO AND VIDEO STREAMING
+
+Enjoy uninterrupted playback of audio and video content. Benefit from our comprehensive support for streaming media, ensuring a seamless user experience on your mirrored website.
+
+# Next.js Proxy Setup
 
 ![image](https://github.com/donspablo/next.js-proxy/assets/6468571/dc1e0d63-f7ca-4b5e-9171-3367637c15c7)
 
