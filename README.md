@@ -6,13 +6,17 @@
 | <p align="center"><img height="150px" src="https://user-images.githubusercontent.com/6468571/191125131-4e76fe43-770b-49e8-aa66-d1c8723f7e7a.png"></img></p><sub><sup><a href="https://github.com/4dboard/Proxy-yxorP">YXORP PROXY</a>: Web Proxy 🐮 yxorP: SAAS(y) Guzzler + App (GUI Dashboard incl.). Feature Rich, Multi-tenancy, Headless, Plug & Play, Augmentation & Content Spinning Web Proxy with Caching - PHP CURL+Composer are Optional. Leveraging SAAS architecture to provide multi-tenancy, multiple threads, caching, and an article spinner service.</sub></sup> | <p align="center"><img height="150px" src="https://user-images.githubusercontent.com/6468571/191125113-9d991af2-f911-43df-8994-a573aaf9a7ac.png"></img></p><sub><sup><a href="https://github.com/meanos/meanOs">MEANOS</a>: The operating system with the smallest memory footprint and the highest performance levels. NEW RELEASE A new version of the Web3 operating system will be released in the near future. https://mean.ơs.com. Operating systems have been subjected to significant revisions; if you would want to be informed when the subsequent version is made available, please subscribe.</sub></sup> |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
-![image](https://github.com/donspablo/next.js-proxy/assets/6468571/efe7351f-cf54-49bd-b505-fae61717a56f)
 
-# Next.js Website Proxy
+
+![image](https://github.com/donspablo/next.js-proxy/assets/6468571/a885b428-cef2-41de-87a2-7b894c55c85e)
 
 [![Build App](https://github.com/donspablo/next.js-proxy/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/donspablo/next.js-proxy/actions/workflows/pages/pages-build-deployment) [![Netlify Status](https://api.netlify.com/api/v1/badges/7a251573-b9b3-45d6-9d74-86340e727316/deploy-status)](https://app.netlify.com/sites/freegamesonline/deploys) ![Vercel](https://vercelbadge.vercel.app/api/donspablo/next.js-proxy) [![Deploy App](https://github.com/donspablo/next.js-proxy/actions/workflows/nextjs.yml/badge.svg)](https://github.com/donspablo/next.js-proxy/actions/workflows/nextjs.yml)
 
-![image](https://github.com/donspablo/next.js-proxy/assets/6468571/3f64f3f6-e0e5-4ac0-b7aa-f693ffcd0bed)
+![image](https://github.com/donspablo/next.js-proxy/assets/6468571/36cb79e5-854d-4778-830f-6ed3df591ec6)
+
+# Next.js Website Proxy
+
+![image](https://github.com/donspablo/next.js-proxy/assets/6468571/dc1e0d63-f7ca-4b5e-9171-3367637c15c7)
 
 Next.js Proxy is a powerful tool that enables you to create a web proxy, mirror a desired website, and host the
 application on Vercel. By following these expert instructions, you can set up Next.js Proxy and deploy it on Vercel:
@@ -69,7 +73,7 @@ By following these expert instructions, you can leverage Next.js Proxy to create
 Vercel. This allows you to mirror a desired website while utilizing the power and scalability of the Vercel hosting
 platform.
 
-![image](https://github.com/donspablo/next.js-proxy/assets/6468571/a11593ea-d675-417f-a19d-eee8e57e1bbd)
+![image](https://github.com/donspablo/next.js-proxy/assets/6468571/6832e90b-44e5-42e3-85d7-4869007fc4bc)
 
 # 1. Forking the Repository:
 
